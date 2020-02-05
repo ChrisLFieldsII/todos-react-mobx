@@ -20,7 +20,7 @@ class TodoView extends React.Component {
         </div>
         {model.todos.map((todo, index) => <TodoDetail key={todo.id} model={model} todo={todo} index={index} />)}
         <br />
-        <NumValidTodos />
+        <TodosMeta />
       </div>
     );
   }
@@ -44,17 +44,22 @@ class TodoDetail extends React.Component {
 }
 
 @observer
-class NumValidTodos extends React.Component {
+class TodosMeta extends React.Component {
   static contextType = ViewModelContext;
   
   render() {
     const {todoViewModel} = this.context;
+    const totalTodos = todoViewModel.todos.length;
     const numValidTodos = todoViewModel.todos.filter(todo => todo.isValid).length;
+    const numCompleteTodos = todoViewModel.todos.filter(todo => todo.isDone).length;
   
     return (
-      <div>
+      <div style={{ border: '1px solid black', padding: 10 }}>
+        <h2>Todos Metadata</h2>
         <p>Valid #: {numValidTodos}</p>
-        <p>Invalid #: {todoViewModel.todos.length - numValidTodos}</p>
+        <p>Invalid #: {totalTodos - numValidTodos}</p>
+        <p>Completed #: {numCompleteTodos}</p>
+        <p>Incomplete #: {totalTodos - numCompleteTodos}</p>
       </div>
     );
   }
