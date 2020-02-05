@@ -5,7 +5,10 @@ import {Todo} from './Todo';
 class TodoViewModel {
   @observable todos = [];
 
-  constructor() {
+  storage = null;
+
+  constructor({ storage }) {
+    this.storage = storage;
     this.load();
   }
 
@@ -25,27 +28,24 @@ class TodoViewModel {
 
   @action
   load() {
-    if (!window.localStorage) return;
+    if (!this.storage) return;
 
-    const json = JSON.parse(window.localStorage.getItem('todos') || '[]');
+    const json = JSON.parse(this.storage.getItem('todos') || '[]');
     this.todos = json.map(todoJson => Todo.deserialize(todoJson));
 
     return this.todos;
   }
 
-  @action
   save() {
-    if (!window.localStorage) return;
+    if (!this.storage) return;
 
     if (this.todos.filter(todo => !todo.isValid).length > 0) {
       return alert('Unable to save due to invalid todos');
     }
 
     const json = this.todos.map(todo => todo.serialize());
-    window.localStorage.setItem('todos', JSON.stringify(json));
+    this.storage.setItem('todos', JSON.stringify(json));
   }
 }
 
-const todoViewModel = new TodoViewModel();
-
-export {todoViewModel, TodoViewModel}
+export {TodoViewModel}

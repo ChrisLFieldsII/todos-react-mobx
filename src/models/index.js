@@ -1,2 +1,2 @@
-export { TodoViewModel, todoViewModel } from './TodoViewModel';
+export { TodoViewModel } from './TodoViewModel';
 export { Todo } from './Todo';
