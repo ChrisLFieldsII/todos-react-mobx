@@ -1,6 +1,6 @@
 import {observable, action} from 'mobx';
 
-import Todo from './Todo';
+import {Todo} from './Todo';
 
 class TodoViewModel {
   @observable todos = [];
@@ -46,4 +46,6 @@ class TodoViewModel {
   }
 }
 
-export default TodoViewModel;
+const todoViewModel = new TodoViewModel();
+
+export {todoViewModel, TodoViewModel}

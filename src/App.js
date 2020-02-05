@@ -1,11 +1,15 @@
 import React from 'react';
 
-import TodoViewModel from './models/TodoViewModel';
 import TodoView from './screens/TodoView';
+
+import {ViewModelContext} from './contexts';
+import { todoViewModel } from './models';
 
 function App() {
   return (
-    <TodoView model={new TodoViewModel()} />
+    <ViewModelContext.Provider value={{todoViewModel}}>
+      <TodoView />
+    </ViewModelContext.Provider>
   );
 }
 
