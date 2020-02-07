@@ -1,3 +1,9 @@
+### This is a small repo playing around with React and MobX so I can get more familiar with the MVVM architecture.
+
+### The master branch and feat/provider branch accomplish the same thing. The only difference is the master branch passes the ViewModel directly to the View whereas feat/provider uses React context api to pass ViewModel to child Views.
+
+==================================================================================================
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
